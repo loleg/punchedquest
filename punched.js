@@ -1,5 +1,10 @@
 // based on the 'quick' sample
 
+var config = {
+	NUM_ROWS: 12,
+	NUM_COLS: 6
+};
+
 RPGJS.Materials = {
 	"characters": {
 		"1": "event1.png"
@@ -43,10 +48,10 @@ RPGJS.defines({
 
 var $punchcard = $('#punchcard');
 
-for (var i = 0; i < 10; i++) {
+for (var i = 0; i < config.NUM_ROWS; i++) {
 	var prow = $punchcard
 			.append('<div class="punch row"></div>').find('.row:last');
-	for (var j = 0; j < 4; j++) {
+	for (var j = 0; j < config.NUM_COLS; j++) {
 		prow.append('<span><input type="checkbox"></span>');
 	}
 }
@@ -66,6 +71,8 @@ $('#punchit').click(function() {
 			if (step[1]) route = route.concat(["turn_right", "wait_10", "right"]);
 			if (step[2]) route = route.concat(["turn_up", "wait_10", "up"]);
 			if (step[3]) route = route.concat(["turn_bottom", "wait_10", "bottom"]);
+			if (step[4]) route = route.concat(["turn_bottom", "wait_10", "bottom"]);
+			if (step[5]) route = route.concat(["turn_bottom", "wait_10", "bottom"]);
 			route.push("wait_40");
 		});
 		console.log(route);
