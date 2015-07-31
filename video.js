@@ -66,8 +66,19 @@ $('#sendcard').click(function() {
     data: data,
     success: function(response) {
       console.log(response);
+      // Reset the form
+      $('#punchcard')[0].reset();
+      // Map array responses to inputs
+      var arr = JSON.parse(response);
+      for (var i = 0; i < arr.length; i++) {
+        for (var j = 0; j < arr[i].length; j++) {
+          $($('.punch.row')[i]).find('input')[j].checked = 'checked';
+        }
+      }
     }
   });
+
+  $('#myModal').modal('hide');
 });
 
 video.addEventListener('click', snapshot, false);
