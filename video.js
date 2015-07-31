@@ -36,8 +36,8 @@ function snapshot() {
 function resett() {
   preview.style.display = "none";
   video.style.display = "";
+  haveCapture = false;
 }
-
 
 function dataURItoBlob(dataURI) {
     var binary = atob(dataURI.split(',')[1]);
@@ -48,10 +48,14 @@ function dataURItoBlob(dataURI) {
     return new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
 }
 
+function flashAlert(ident) {
+  $('#alert-' + ident).removeClass('fade');
+  setTimeout(function() { $('#alert-' + ident).addClass('fade'); }, 5000);
+}
 
 $('#sendcard').click(function() {
   if (!haveCapture) {
-    alert('Please tap on the preview to freeze the frame');
+    flashAlert('freeze');
     return false;
   }
 
@@ -65,7 +69,12 @@ $('#sendcard').click(function() {
     processData: false,
     data: data,
     success: function(response) {
-      console.log(response);
+      // console.log(response);
+      if (Object.prototype.toString.call(response) !== '[object Array]') {
+        flashAlert('failed');
+        resett();
+        return;
+      }
       // Reset the form
       $('#punchcard')[0].reset();
       // Map array responses to inputs
@@ -75,10 +84,9 @@ $('#sendcard').click(function() {
           $($('.punch.row')[i]).find('input')[j].checked = 'checked';
         }
       }
+      $('#myModal').modal('hide');
     }
   });
-
-  $('#myModal').modal('hide');
 });
 
 video.addEventListener('click', snapshot, false);
