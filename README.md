@@ -1,6 +1,8 @@
-# Punched Quest!
+# PunchedQuest!
 
 This is the frontend of our prototype game.
+
+Also check out the [backend](https://github.com/loleg/punchedquest-server).
 
 To install, make sure to
 
