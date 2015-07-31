@@ -1,0 +1,3 @@
+[submodule "RPG-JS"]
+	path = RPG-JS
+	url = https://github.com/loleg/RPG-JS
