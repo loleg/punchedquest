@@ -12,11 +12,20 @@ var localMediaStream = null;
 function snapshot() {
  if (localMediaStream) {
    ctx.drawImage(video, 0, 0);
-   // "image/webp" works in Chrome.
-   // Other browsers will fall back to image/png.
-   preview.src = canvas.toDataURL('image/webp');
-   preview.style.display = "";
-   video.style.display = "none";
+   // Some image processing
+   var proc = Caman("#capture", function() {
+     this.greyscale()
+         .brightness(20)
+         .contrast(30)
+         .render(function () {
+            var image = this.toBase64();
+            preview.src = image; // your ajax function
+
+            // Hide the other image
+            preview.style.display = "";
+            video.style.display = "none";
+          });
+   });
  }
 }
 
