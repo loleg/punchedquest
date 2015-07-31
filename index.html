@@ -31,6 +31,7 @@
       text-align: center;
       display: inline-block;
       margin: 0;
+      color: #f91;
     }
     #punchcard .row > span {
       width: 3em;
@@ -63,6 +64,13 @@
     #preview {
       opacity: 0.6;
     }
+
+    .punchout {
+      background: white;
+      border-radius: 6px;
+      padding: 24px;
+      margin-top: -12px;
+    }
     </style>
   </head>
 
@@ -89,9 +97,9 @@
 
           <div class="row">
             <div class="col-md-7">
-              <canvas id="canvas" width="240px" height="320px"></canvas>
+              <canvas id="canvas" width="480" height="455"></canvas>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-5 punchout">
               <div id="punchcard">
                 <div class="row">
                   <i class="fa fa-arrow-left"></i>

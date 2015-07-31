@@ -7,7 +7,8 @@ var config = {
 
 RPGJS.Materials = {
 	"characters": {
-		"1": "event1.png"
+		"1": "event1.png",
+		"2": "event2.png"
 	},
 	"tilesets": {
 		"1": "tileset.png"
@@ -39,11 +40,25 @@ RPGJS.defines({
 }).ready(function() {
 
 	RPGJS.Player.init({
-		actor: 1,
+		actor: 1, trigger: false,
 		start: {x: 10, y: 10, id: 1}
 	});
 
-	RPGJS.Scene.map();
+	RPGJS.Scene.map(function() {
+
+    var e = RPGJS.Map.createEvent("EV-1", 7, 10);
+
+    e.addPage({
+        "trigger": "contact",
+        "type": "fixed",
+        "graphic": "2"
+    }, [
+        "SHOW_TEXT: {'text': 'Hello there!'}"
+    ]);
+
+    e.display();
+
+  });
 });
 
 var $punchcard = $('#punchcard');
@@ -71,11 +86,11 @@ $('#punchit').click(function() {
 			if (step[1]) route = route.concat(["turn_right", "wait_10", "right"]);
 			if (step[2]) route = route.concat(["turn_up", "wait_10", "up"]);
 			if (step[3]) route = route.concat(["turn_bottom", "wait_10", "bottom"]);
-			if (step[4]) route = route.concat(["turn_bottom", "wait_10", "bottom"]);
-			if (step[5]) route = route.concat(["turn_bottom", "wait_10", "bottom"]);
+			if (step[4]) route = route.concat(["turn_left", "wait_10", "turn_right", "wait_10", "turn_up", "wait_10", "turn_bottom"]);
+			if (step[5]) for (var i=0;i<3;i++) route = route.concat(["opacity_100", "wait_5", "opacity_1000", "wait_5"]);
 			route.push("wait_40");
 		});
-		console.log(route);
+		// console.log(route);
 		RPGJS.Player.moveRoute(route);
 	});
 });
