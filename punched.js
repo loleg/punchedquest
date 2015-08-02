@@ -36,11 +36,11 @@ RPGJS.Database = {
 RPGJS.defines({
 	canvas: "canvas",
 	autoload: false,
-	scene_path: "RPG-JS/"
+	scene_path: "RPG-JS/",
 }).ready(function() {
 
 	RPGJS.Player.init({
-		actor: 1, trigger: false,
+		actor: 1,
 		start: {x: 10, y: 10, id: 1}
 	});
 
@@ -59,6 +59,8 @@ RPGJS.defines({
     e.display();
 
   });
+
+	RPGJS.Player.freeze = true;
 });
 
 var $punchcard = $('#punchcard');
